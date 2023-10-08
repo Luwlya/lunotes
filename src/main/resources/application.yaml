@@ -1,0 +1,13 @@
+spring:
+  flyway:
+    url: jdbc:postgresql://localhost:5431/lunotes
+    user: postgres
+    password: postgres
+    clean-on-validation-error: false
+    clean-disabled: true
+
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5431/lunotes
+    username: postgres
+    password: postgres
