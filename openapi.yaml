@@ -1,0 +1,276 @@
+openapi: "3.0.3"
+info:
+  title: Notes Service API
+  description: API for Notes creation
+  version: "1.0.0"
+servers:
+  - url: "https://api.lunotes.luwlya.com"
+paths:
+  /notes:
+    get:
+      summary: Get user notes
+      operationId: "getUserNotes"
+      parameters:
+        - name: "title"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+        - name: "tag"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+        - name: "text"
+          in: "query"
+          required: false
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: List of all Notes of given user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NoteListDto"
+    post:
+      summary: Create new note
+      operationId: "createNote"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateNoteRequest"
+        required: true
+      responses:
+        "200":
+          description: Note was successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NoteDto"
+  /notes/{id}:
+    get:
+      summary: Get note with given id
+      operationId: "getNote"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "uuid"
+      responses:
+        "200":
+          description: Note information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NoteDto"
+    patch:
+      summary: Update note
+      operationId: "updateNote"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "uuid"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateNoteRequest"
+        required: true
+      responses:
+        "200":
+          description: Note was successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NoteDto"
+    delete:
+      summary: Delete Note with given id
+      operationId: "deleteNote"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "uuid"
+      responses:
+        "204":
+          description: Note with given id was successfully deleted
+  /accounts:
+    post:
+      summary: Create account
+      operationId: "createAccount"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateAccountRequest"
+        required: true
+      responses:
+        "200":
+          description: Account was successfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccountDto"
+  /accounts/{id}:
+    patch:
+      summary: Update Account information
+      operationId: "updateAccount"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+            format: "uuid"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateAccountRequest"
+        required: true
+      responses:
+        "200":
+          description: Account was successfully updated
+          content:
+            'application/json':
+              schema:
+                $ref: "#/components/schemas/AccountDto"
+components:
+  schemas:
+    AccountDto:
+      type: "object"
+      properties:
+        id:
+          type: "string"
+          format: "uuid"
+        name:
+          type: "string"
+        email:
+          type: "string"
+        createdAt:
+          type: "string"
+          format: "date-time"
+        status:
+          type: "string"
+          enum:
+            - "ACTIVE"
+            - "INACTIVE"
+      required:
+        - id
+        - name
+        - email
+        - createdAt
+        - status
+    CreateAccountRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        email:
+          type: "string"
+        password:
+          type: "string"
+      required:
+        - name
+        - email
+        - password
+    UpdateAccountRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        email:
+          type: "string"
+        password:
+          type: "string"
+    NoteDto:
+      type: object
+      properties:
+        id:
+          type: "string"
+          format: "uuid"
+        authorId:
+          type: string
+          format: uuid
+        title:
+          type: "string"
+        text:
+          type: string
+        createdAt:
+          type: "string"
+          format: "date-time"
+        updatedAt:
+          type: "string"
+          format: "date-time"
+        visibility:
+          type: "string"
+          enum:
+            - "PUBLIC"
+            - "PRIVATE"
+        tags:
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - authorId
+        - title
+        - text
+        - createdAt
+        - updatedAt
+        - visibility
+        - tags
+    NoteListDto:
+      type: "object"
+      properties:
+        items:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/NoteDto"
+      required:
+        - items
+    CreateNoteRequest:
+      type: object
+      properties:
+        title:
+          type: "string"
+        text:
+          type: string
+        visibility:
+          type: "string"
+          enum:
+            - "PUBLIC"
+            - "PRIVATE"
+        tags:
+          type: array
+          items:
+            type: string
+      required:
+        - title
+        - text
+        - visibility
+    UpdateNoteRequest:
+      type: object
+      properties:
+        title:
+          type: "string"
+        text:
+          type: string
+        visibility:
+          type: "string"
+          enum:
+            - "PUBLIC"
+            - "PRIVATE"
+        tags:
+          type: array
+          items:
+            type: string

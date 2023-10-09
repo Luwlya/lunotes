@@ -1,7 +1,7 @@
 + 1. create user stories
 + 2. create github repository
 + 3. hello world http server
-4. create OpenAPI spec
++ 4. create OpenAPI spec
 5. implement endpoints
 6. add postgres db
 7. add validation
