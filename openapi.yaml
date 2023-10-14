@@ -6,6 +6,23 @@ info:
 servers:
   - url: "https://api.lunotes.luwlya.com"
 paths:
+  /login:
+    post:
+      summary: Login user to app
+      operationId: "login"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateNoteRequest"
+        required: true
+      responses:
+        "200":
+          description: Login was successfully made
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
   /notes:
     get:
       summary: Get user notes
@@ -119,7 +136,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/AccountDto"
+                $ref: "#/components/schemas/AccountResponse"
   /accounts/{id}:
     patch:
       summary: Update Account information
@@ -143,10 +160,10 @@ paths:
           content:
             'application/json':
               schema:
-                $ref: "#/components/schemas/AccountDto"
+                $ref: "#/components/schemas/AccountResponse"
 components:
   schemas:
-    AccountDto:
+    AccountResponse:
       type: "object"
       properties:
         id:
@@ -274,3 +291,8 @@ components:
           type: array
           items:
             type: string
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
