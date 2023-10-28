@@ -9,3 +9,11 @@ Content-Type: application/json
   "email": "luwlya@luwlya.com",
   "password": "1234pass4321"
 }
+###
+
+PATCH http://localhost:8080/accounts/9e738ccb-4484-41c8-8cc0-0501e09d2f1c
+Content-Type: application/json
+
+{
+  "email": "mushlya@luwlya.com"
+}

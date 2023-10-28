@@ -3,8 +3,12 @@
 + 3. hello world http server
 + 4. create OpenAPI spec
 5. implement endpoints
-6. add postgres db
++5a. accounts
+5b. notes
+5c. login
++6. add postgres db
 7. add validation
 8. tests
 9. frontend
 10. deploy
+11.hadle account with duplicate emails

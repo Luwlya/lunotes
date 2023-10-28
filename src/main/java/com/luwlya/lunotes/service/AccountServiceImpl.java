@@ -16,9 +16,9 @@ import java.util.UUID;
 
 @Service
 public class AccountServiceImpl implements AccountService {
-    private Clock clock;
-    private PasswordEncoder passwordEncoder;
-    private AccountRepository accountRepository;
+    private final Clock clock;
+    private final PasswordEncoder passwordEncoder;
+    private final AccountRepository accountRepository;
 
     @Autowired
     public AccountServiceImpl(Clock clock, PasswordEncoder passwordEncoder, AccountRepository accountRepository) {
@@ -53,6 +53,15 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountResponse updateAccount(UUID id, UpdateAccountRequest update) {
-        return null;
+        Account account = accountRepository.get(id);
+        Account updatedAccount = new Account(id,
+                update.name() != null ? update.name() : account.name(),
+                update.email() != null ? update.email() : account.email(),
+                update.password() != null ? passwordEncoder.encode(update.password()) : account.passwordHash(),
+                account.createdAt(),
+                OffsetDateTime.now(),
+                account.status());
+        accountRepository.update(updatedAccount);
+        return dto(updatedAccount);
     }
 }
