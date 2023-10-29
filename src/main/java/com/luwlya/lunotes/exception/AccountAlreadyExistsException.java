@@ -1,9 +1,7 @@
 package com.luwlya.lunotes.exception;
 
-import java.util.UUID;
-
 public class AccountAlreadyExistsException extends RuntimeException {
-    public AccountAlreadyExistsException(UUID id) {
-        super("Account " + id + " is already existed.");
+    public AccountAlreadyExistsException(String email) {
+        super("Account " + email + " is already existed.");
     }
 }
