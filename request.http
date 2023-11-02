@@ -17,3 +17,5 @@ Content-Type: application/json
 {
   "email": "luwlya@luwlya.com"
 }
+###
+GET http://localhost:8080/accounts/ba431486-b77d-4eeb-ba88-fc2b583fa677

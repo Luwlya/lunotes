@@ -4,7 +4,7 @@
 + 4. create OpenAPI spec
 5. implement endpoints
 +5a. accounts
-5aa. account get
++5aa. account get
 5b. notes
 5c. login
 +6. add postgres db

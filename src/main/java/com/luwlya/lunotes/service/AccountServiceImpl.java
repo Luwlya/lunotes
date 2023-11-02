@@ -4,6 +4,7 @@ import com.luwlya.lunotes.dto.account.AccountResponse;
 import com.luwlya.lunotes.dto.account.CreateAccountRequest;
 import com.luwlya.lunotes.dto.account.UpdateAccountRequest;
 import com.luwlya.lunotes.exception.AccountAlreadyExistsException;
+import com.luwlya.lunotes.exception.AccountNotFoundException;
 import com.luwlya.lunotes.model.Account;
 import com.luwlya.lunotes.model.AccountStatus;
 import com.luwlya.lunotes.repository.AccountRepository;
@@ -79,5 +80,14 @@ public class AccountServiceImpl implements AccountService {
             throw new RuntimeException(e);
         }
         return dto(updatedAccount);
+    }
+
+    @Override
+    public AccountResponse get(UUID id) {
+        Account account = accountRepository.get(id);
+        if (account == null) {
+            throw new AccountNotFoundException(id);
+        }
+        return dto(account);
     }
 }

@@ -10,4 +10,6 @@ public interface AccountService {
     AccountResponse createAccount(CreateAccountRequest request);
 
     AccountResponse updateAccount(UUID id, UpdateAccountRequest update);
+
+    AccountResponse get(UUID id);
 }

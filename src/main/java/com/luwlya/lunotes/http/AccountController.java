@@ -35,4 +35,11 @@ public class AccountController {
         AccountResponse accountResponse = accountService.updateAccount(id, update);
         return ResponseEntity.ok().body(accountResponse);
     }
+
+    @GetMapping("/accounts/{id}")
+    public ResponseEntity<AccountResponse> getAccount(@PathVariable UUID id){
+        AccountResponse accountResponse = accountService.get(id);
+        return ResponseEntity.ok().body(accountResponse);
+    }
+
 }
