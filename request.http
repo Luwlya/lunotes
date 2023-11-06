@@ -25,7 +25,15 @@ POST http://localhost:8080/notes
 Content-Type: application/json
 
 {
+  "authorId": "ba431486-b77d-4eeb-ba88-fc2b583fa676",
   "title": "MyNote",
   "text": "Test my Note",
-  "tags": ["test", "Note"]
+  "tags": [
+    "test",
+    "Note"
+  ],
+  "visibility": ""
 }
+
+###
+GET http://localhost:8080/notes/{{id}}

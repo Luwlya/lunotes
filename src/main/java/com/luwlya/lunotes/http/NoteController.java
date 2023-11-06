@@ -1,8 +1,8 @@
 package com.luwlya.lunotes.http;
 
 import com.luwlya.lunotes.dto.note.CreateNoteRequest;
-import com.luwlya.lunotes.dto.note.Note;
-import com.luwlya.lunotes.dto.note.NoteList;
+import com.luwlya.lunotes.dto.note.NoteDto;
+import com.luwlya.lunotes.dto.note.NoteDtoList;
 import com.luwlya.lunotes.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +23,14 @@ public class NoteController {
     }
 
     @PostMapping("/notes")
-    public ResponseEntity<Note> createNote(@RequestBody @Validated CreateNoteRequest request) {
-        Note note = noteService.createNote(request);
-        return ResponseEntity.ok().body(note);
+    public ResponseEntity<NoteDto> createNote(@RequestBody @Validated CreateNoteRequest request) {
+        NoteDto noteDto = noteService.createNote(request);
+        return ResponseEntity.ok().body(noteDto);
     }
 
     @GetMapping("/notes")
-    public ResponseEntity<NoteList> getAllNotes(){
-        NoteList listDto = noteService.getAllNotes();
+    public ResponseEntity<NoteDtoList> getAllNotes(){
+        NoteDtoList listDto = noteService.getAllNotes();
         return ResponseEntity.ok().body(listDto);
     }
 }

@@ -1,11 +1,9 @@
 package com.luwlya.lunotes.dto.note;
 
-import jakarta.validation.constraints.NotNull;
+import com.luwlya.lunotes.model.NoteVisibility;
 
 public record UpdateNoteRequest (
-        @NotNull
         String title,
-        @NotNull
         String text,
-        Visibility visibility){
+        NoteVisibility noteVisibility){
 }

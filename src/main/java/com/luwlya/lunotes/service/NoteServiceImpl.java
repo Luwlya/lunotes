@@ -1,50 +1,69 @@
 package com.luwlya.lunotes.service;
 
-import com.luwlya.lunotes.dto.note.*;
+import com.luwlya.lunotes.dto.note.CreateNoteRequest;
+import com.luwlya.lunotes.dto.note.NoteDto;
+import com.luwlya.lunotes.dto.note.NoteDtoList;
+import com.luwlya.lunotes.dto.note.UpdateNoteRequest;
+import com.luwlya.lunotes.model.Note;
+import com.luwlya.lunotes.model.NoteVisibility;
+import com.luwlya.lunotes.repository.NoteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Clock;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Service
 public class NoteServiceImpl implements NoteService {
+    private final NoteRepository noteRepository;
+    private final Clock clock;
+
+    @Autowired
+    public NoteServiceImpl(NoteRepository noteRepository, Clock clock) {
+        this.noteRepository = noteRepository;
+        this.clock = clock;
+    }
+
     @Override
-    public Note createNote(CreateNoteRequest request) {
+    public NoteDto createNote(CreateNoteRequest request) {
         Note note = new Note(UUID.randomUUID(),
-                UUID.randomUUID(),
+                request.authorId(),
                 request.title(),
                 request.text(),
-                OffsetDateTime.now(),
-                OffsetDateTime.now(),
-                Visibility.PUBLIC,
+                OffsetDateTime.now(clock),
+                OffsetDateTime.now(clock),
+                NoteVisibility.PUBLIC,
                 request.tags());
+        noteRepository.insert(note);
         return dto(note);
     }
 
-    private Note dto(Note note) {
-        return new Note(
+    private NoteDto dto(Note note) {
+        return new NoteDto(
                 note.id(),
                 note.authorId(),
                 note.title(),
                 note.text(),
                 OffsetDateTime.now(),
                 OffsetDateTime.now(),
-                Visibility.PUBLIC,
+                NoteVisibility.PUBLIC,
                 note.tags());
     }
 
     @Override
-    public Note getNote(UUID id) {
+    public NoteDto getNote(UUID id) {
+        Note note = noteRepository.get(id);
+        return dto(note);
+    }
+
+    @Override
+    public NoteDtoList getAllNotes() {
         return null;
     }
 
     @Override
-    public NoteList getAllNotes() {
-        return null;
-    }
-
-    @Override
-    public Note updateNote(UUID id, UpdateNoteRequest update) {
+    public NoteDto updateNote(UUID id, UpdateNoteRequest update) {
         return null;
     }
 

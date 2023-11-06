@@ -1,20 +1,20 @@
 package com.luwlya.lunotes.service;
 
 import com.luwlya.lunotes.dto.note.CreateNoteRequest;
-import com.luwlya.lunotes.dto.note.Note;
-import com.luwlya.lunotes.dto.note.NoteList;
+import com.luwlya.lunotes.dto.note.NoteDto;
+import com.luwlya.lunotes.dto.note.NoteDtoList;
 import com.luwlya.lunotes.dto.note.UpdateNoteRequest;
 
 import java.util.UUID;
 
 public interface NoteService {
-    Note createNote(CreateNoteRequest request);
+    NoteDto createNote(CreateNoteRequest request);
 
-    Note getNote(UUID id);
+    NoteDto getNote(UUID id);
 
-    NoteList getAllNotes();
+    NoteDtoList getAllNotes();
 
-    Note updateNote(UUID id, UpdateNoteRequest update);
+    NoteDto updateNote(UUID id, UpdateNoteRequest update);
 
     void deleteNote(UUID id);
 }
