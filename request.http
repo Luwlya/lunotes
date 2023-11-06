@@ -19,3 +19,13 @@ Content-Type: application/json
 }
 ###
 GET http://localhost:8080/accounts/ba431486-b77d-4eeb-ba88-fc2b583fa677
+
+###
+POST http://localhost:8080/notes
+Content-Type: application/json
+
+{
+  "title": "MyNote",
+  "text": "Test my Note",
+  "tags": ["test", "Note"]
+}

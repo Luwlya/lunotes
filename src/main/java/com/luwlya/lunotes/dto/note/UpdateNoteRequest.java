@@ -1,4 +1,11 @@
 package com.luwlya.lunotes.dto.note;
 
-public class UpdateNoteRequest {
+import jakarta.validation.constraints.NotNull;
+
+public record UpdateNoteRequest (
+        @NotNull
+        String title,
+        @NotNull
+        String text,
+        Visibility visibility){
 }
