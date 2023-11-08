@@ -70,7 +70,10 @@ public class NoteRepositoryImpl implements NoteRepository {
     }
 
     @Override
-    public boolean delete(Note note) {
-        return false;
+    public boolean delete(UUID id) {
+        String SQL = "DELETE FROM notes WHERE id = ?";
+        Object[] args = new Object[] {id};
+        System.out.println("Note " + id + "has been successfully deleted" );
+        return jdbcTemplate.update(SQL, args) == 1;
     }
 }

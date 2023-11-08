@@ -4,6 +4,7 @@ import com.luwlya.lunotes.dto.note.CreateNoteRequest;
 import com.luwlya.lunotes.dto.note.NoteDto;
 import com.luwlya.lunotes.dto.note.NoteDtoList;
 import com.luwlya.lunotes.dto.note.UpdateNoteRequest;
+import com.luwlya.lunotes.exception.NoteNotFoundException;
 import com.luwlya.lunotes.model.Note;
 import com.luwlya.lunotes.model.NoteVisibility;
 import com.luwlya.lunotes.repository.NoteRepository;
@@ -82,6 +83,11 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public void deleteNote(UUID id) {
-
+        boolean deletedNote = noteRepository.delete(id);
+        if (deletedNote) {
+            System.out.println("Note " + id + " has been deleted");
+        } else {
+            throw new NoteNotFoundException(id);
+        }
     }
 }

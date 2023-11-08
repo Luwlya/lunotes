@@ -45,3 +45,6 @@ Content-Type: application/json
 {
   "title": "PrivateNote"
 }
+
+###
+DELETE http://localhost:8080/notes/49b74f62-834c-4720-a005-b4cf8ae9fd17

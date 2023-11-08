@@ -46,4 +46,10 @@ public class NoteController {
         NoteDto noteDto = noteService.updateNote(id, update);
         return ResponseEntity.ok().body(noteDto);
     }
+
+    @DeleteMapping("/notes/{id}")
+    public ResponseEntity<Void> deleteNote(@PathVariable UUID id) {
+        noteService.deleteNote(id);
+        return ResponseEntity.noContent().build();
+    }
 }

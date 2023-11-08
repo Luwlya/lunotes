@@ -14,5 +14,5 @@ public interface NoteRepository {
 
     void update(Note updatedNote);
 
-    boolean delete(Note note);
+    boolean delete(UUID id);
 }
