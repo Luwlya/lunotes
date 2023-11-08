@@ -56,7 +56,7 @@ public class NoteRepositoryImpl implements NoteRepository {
 
     @Override
     public List<Note> getAllNotes() {
-        return null;
+        return jdbcTemplate.query("SELECT * FROM notes", this::extractNote);
     }
 
     @Override

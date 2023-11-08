@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Clock;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -59,7 +60,9 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public NoteDtoList getAllNotes() {
-        return null;
+        List<Note> notes = noteRepository.getAllNotes();
+        List<NoteDto> result = notes.stream().map(this::dto).toList();
+        return new NoteDtoList(result);
     }
 
     @Override
