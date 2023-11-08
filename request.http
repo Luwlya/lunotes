@@ -37,3 +37,11 @@ Content-Type: application/json
 
 ###
 GET http://localhost:8080/notes/dd7beca8-edfe-461f-b210-156b2b3588e3
+
+###
+PATCH http://localhost:8080/notes/e89d87e0-50e3-476a-a1ad-e04cca9d620a
+Content-Type: application/json
+
+{
+  "title": "PrivateNote"
+}

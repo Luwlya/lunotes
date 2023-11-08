@@ -64,7 +64,17 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public NoteDto updateNote(UUID id, UpdateNoteRequest update) {
-        return null;
+        Note note = noteRepository.get(id);
+        Note updatedNote = new Note(id,
+                note.authorId(),
+                update.title() != null ? update.title() : note.title(),
+                update.text() != null ? update.text() : note.text(),
+                note.createdAt(),
+                OffsetDateTime.now(),
+                note.noteVisibility(),
+                update.tags() != null ? update.tags() : note.tags());
+        noteRepository.update(updatedNote);
+        return dto(updatedNote);
     }
 
     @Override

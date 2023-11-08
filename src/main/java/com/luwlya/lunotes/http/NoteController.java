@@ -3,6 +3,7 @@ package com.luwlya.lunotes.http;
 import com.luwlya.lunotes.dto.note.CreateNoteRequest;
 import com.luwlya.lunotes.dto.note.NoteDto;
 import com.luwlya.lunotes.dto.note.NoteDtoList;
+import com.luwlya.lunotes.dto.note.UpdateNoteRequest;
 import com.luwlya.lunotes.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,5 +38,12 @@ public class NoteController {
     public ResponseEntity<NoteDto> getNote(@PathVariable UUID id) {
         NoteDto dto = noteService.getNote(id);
         return ResponseEntity.ok().body(dto);
+    }
+
+    @PatchMapping("/notes/{id}")
+    public ResponseEntity<NoteDto> updateNote(@PathVariable UUID id,
+                                                   @RequestBody UpdateNoteRequest update) {
+        NoteDto noteDto = noteService.updateNote(id, update);
+        return ResponseEntity.ok().body(noteDto);
     }
 }

@@ -24,15 +24,15 @@ public class NoteRepositoryImpl implements NoteRepository {
     @Override
     public void insert(Note note) {
         jdbcTemplate.update("INSERT INTO notes(id, author_id, title, text, created_at, updated_at, note_visibility, tags) " +
-                "VALUES (?,?,?,?,?,?,?,?)",
-        note.id(),
-        note.authorId(),
-        note.title(),
-        note.text(),
-        note.createdAt(),
-        note.updatedAt(),
-        note.noteVisibility().name(),
-        note.tags().toArray(new String[0]));
+                        "VALUES (?,?,?,?,?,?,?,?)",
+                note.id(),
+                note.authorId(),
+                note.title(),
+                note.text(),
+                note.createdAt(),
+                note.updatedAt(),
+                note.noteVisibility().name(),
+                note.tags().toArray(new String[0]));
     }
 
     @Override
@@ -50,7 +50,7 @@ public class NoteRepositoryImpl implements NoteRepository {
                 rs.getString("text"),
                 rs.getObject("created_at", OffsetDateTime.class),
                 rs.getObject("updated_at", OffsetDateTime.class),
-                NoteVisibility.valueOf(rs.getString("visibility")),
+                NoteVisibility.valueOf(rs.getString("note_visibility")),
                 Collections.singletonList(rs.getArray("tags").toString()));
     }
 
@@ -60,8 +60,13 @@ public class NoteRepositoryImpl implements NoteRepository {
     }
 
     @Override
-    public void update(Note updatedNote) {
-
+    public void update(Note note) {
+        jdbcTemplate.update(
+                "UPDATE notes SET title = ?, text = ?, tags = ? WHERE id = ?",
+                note.title(),
+                note.text(),
+                note.tags().toArray(new String[0]),
+                note.id());
     }
 
     @Override
