@@ -1,9 +1,14 @@
 package com.luwlya.lunotes.repository;
 
 import com.luwlya.lunotes.model.Note;
+import com.luwlya.lunotes.model.NoteVisibility;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.OffsetDateTime;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,7 +37,21 @@ public class NoteRepositoryImpl implements NoteRepository {
 
     @Override
     public Note get(UUID id) {
-        return null;
+        return jdbcTemplate.queryForObject(
+                "SELECT * FROM notes WHERE id = ?",
+                this::extractNote,
+                id);
+    }
+
+    private Note extractNote(ResultSet rs, int i) throws SQLException {
+        return new Note(rs.getObject("id", UUID.class),
+                rs.getObject("id", UUID.class),
+                rs.getString("title"),
+                rs.getString("text"),
+                rs.getObject("created_at", OffsetDateTime.class),
+                rs.getObject("updated_at", OffsetDateTime.class),
+                NoteVisibility.valueOf(rs.getString("visibility")),
+                Collections.singletonList(rs.getArray("tags").toString()));
     }
 
     @Override

@@ -15,10 +15,10 @@ PATCH http://localhost:8080/accounts/ba431486-b77d-4eeb-ba88-fc2b583fa676
 Content-Type: application/json
 
 {
-  "email": "luwlya@luwlya.com"
+  "email": "luwlya12@luwlya.com"
 }
 ###
-GET http://localhost:8080/accounts/ba431486-b77d-4eeb-ba88-fc2b583fa677
+GET http://localhost:8080/accounts/ba431486-b77d-4eeb-ba88-fc2b583fa676
 
 ###
 POST http://localhost:8080/notes
@@ -36,4 +36,4 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8080/notes/{{id}}
+GET http://localhost:8080/notes/dd7beca8-edfe-461f-b210-156b2b3588e3

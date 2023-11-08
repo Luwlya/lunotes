@@ -7,10 +7,9 @@ import com.luwlya.lunotes.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @Validated
@@ -32,5 +31,11 @@ public class NoteController {
     public ResponseEntity<NoteDtoList> getAllNotes(){
         NoteDtoList listDto = noteService.getAllNotes();
         return ResponseEntity.ok().body(listDto);
+    }
+
+    @GetMapping("/notes/{id}")
+    public ResponseEntity<NoteDto> getNote(@PathVariable UUID id) {
+        NoteDto dto = noteService.getNote(id);
+        return ResponseEntity.ok().body(dto);
     }
 }
