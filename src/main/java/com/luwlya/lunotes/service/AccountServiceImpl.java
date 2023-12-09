@@ -24,7 +24,9 @@ public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
 
     @Autowired
-    public AccountServiceImpl(Clock clock, PasswordEncoder passwordEncoder, AccountRepository accountRepository) {
+    public AccountServiceImpl(Clock clock,
+                              PasswordEncoder passwordEncoder,
+                              AccountRepository accountRepository) {
         this.clock = clock;
         this.passwordEncoder = passwordEncoder;
         this.accountRepository = accountRepository;

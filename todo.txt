@@ -1,13 +1,13 @@
 + 1. create user stories
-+ 2. create github repository
++ 2. create GitHub repository
 + 3. hello world http server
 + 4. create OpenAPI spec
-5. implement endpoints
-+5a. accounts
-+5aa. account get
-5b. notes
++ 5. implement endpoints
++ 5a. accounts
++ 5aa. account get
++ 5b. notes
 5c. login
-+6. add postgres db
++ 6. add postgres db
 7. add validation
 8. tests
 9. frontend

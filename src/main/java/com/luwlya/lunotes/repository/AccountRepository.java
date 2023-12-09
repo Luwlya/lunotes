@@ -9,5 +9,7 @@ public interface AccountRepository {
 
     Account get(UUID id);
 
+    Account getByEmail(String email);
+
     void update(Account updatedAccount);
 }

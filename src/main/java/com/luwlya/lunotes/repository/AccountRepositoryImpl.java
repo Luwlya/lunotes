@@ -50,6 +50,19 @@ public class AccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
+    public Account getByEmail(String email) {
+        try {
+            return jdbcTemplate.queryForObject(
+                    "SELECT * FROM accounts WHERE email = ?",
+                    this::extractAccount,
+                    email
+            );
+        } catch (EmptyResultDataAccessException e) {
+            throw new AccountNotFoundException(email);
+        }
+    }
+
+    @Override
     public void update(Account account) {
         jdbcTemplate.update(
                 "UPDATE accounts SET name = ?, email = ?, password_hash = ?, updated_at = ?, status = ? WHERE id = ?",

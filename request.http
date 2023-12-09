@@ -5,8 +5,8 @@ POST http://localhost:8080/accounts
 Content-Type: application/json
 
 {
-  "name": "Mushlya",
-  "email": "mushlya@luwlya.com",
+  "name": "Luwelka",
+  "email": "lulu@luwlya.com",
   "password": "1234pass4321"
 }
 
@@ -48,3 +48,12 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8080/notes/49b74f62-834c-4720-a005-b4cf8ae9fd17
+
+###
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "email": "lulu@luwlya.com",
+  "password": "1234pass4321"
+}
