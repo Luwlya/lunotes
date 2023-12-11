@@ -7,10 +7,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -22,15 +20,17 @@ public class JwtFilter implements Filter {
                          FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        if (request.getCookies() != null){
-        Optional<Cookie> token = Arrays.stream(request.getCookies())
-                .filter(cookie -> cookie.getName().equals("token"))
-                .findFirst();
-        if(token.isPresent()){
-            User user = new User(token.get().getValue(), "", List.of(new SimpleGrantedAuthority("USER")));
-            SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user, "", new ArrayList<>()));
-        } }
-        filterChain.doFilter(request,response);
+        if (request.getCookies() != null) {
+            Optional<Cookie> token = Arrays.stream(request.getCookies())
+                    .filter(cookie -> cookie.getName().equals("token"))
+                    .findFirst();
+            token.ifPresent(cookie -> {
+                var authorities = List.of(new SimpleGrantedAuthority("ROLE_USER"));
+                var user = new UsernamePasswordAuthenticationToken(cookie.getValue(), "", authorities);
+                SecurityContextHolder.getContext().setAuthentication(user);
+            });
+        }
+        filterChain.doFilter(request, response);
     }
 
 }

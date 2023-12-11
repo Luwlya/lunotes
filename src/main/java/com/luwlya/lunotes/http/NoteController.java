@@ -30,13 +30,13 @@ public class NoteController {
     }
 
     @GetMapping("/notes")
-    public ResponseEntity<NoteDtoList> getAllNotes(){
+    public ResponseEntity<NoteDtoList> getAllNotes() {
         NoteDtoList listDto = noteService.getAllNotes();
         return ResponseEntity.ok().body(listDto);
     }
 
     @GetMapping("/notes/{id}")
-    @Secured("USER")
+    @Secured("ROLE_USER")
     public ResponseEntity<NoteDto> getNote(@PathVariable UUID id) {
         NoteDto dto = noteService.getNote(id);
         return ResponseEntity.ok().body(dto);
@@ -44,7 +44,7 @@ public class NoteController {
 
     @PatchMapping("/notes/{id}")
     public ResponseEntity<NoteDto> updateNote(@PathVariable UUID id,
-                                                   @RequestBody UpdateNoteRequest update) {
+                                              @RequestBody UpdateNoteRequest update) {
         NoteDto noteDto = noteService.updateNote(id, update);
         return ResponseEntity.ok().body(noteDto);
     }
