@@ -39,6 +39,9 @@ Content-Type: application/json
 GET http://localhost:8080/notes
 
 ###
+GET http://localhost:8080/notes/b704d022-ce28-4ccd-8f9b-52bde85112ac
+
+###
 PATCH http://localhost:8080/notes/e89d87e0-50e3-476a-a1ad-e04cca9d620a
 Content-Type: application/json
 

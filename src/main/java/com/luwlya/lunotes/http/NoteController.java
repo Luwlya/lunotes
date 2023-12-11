@@ -7,6 +7,7 @@ import com.luwlya.lunotes.dto.note.UpdateNoteRequest;
 import com.luwlya.lunotes.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +36,7 @@ public class NoteController {
     }
 
     @GetMapping("/notes/{id}")
+    @Secured("USER")
     public ResponseEntity<NoteDto> getNote(@PathVariable UUID id) {
         NoteDto dto = noteService.getNote(id);
         return ResponseEntity.ok().body(dto);
