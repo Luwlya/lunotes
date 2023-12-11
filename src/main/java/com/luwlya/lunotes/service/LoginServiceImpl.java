@@ -22,8 +22,8 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public String login(LoginRequest request) {
         Account account = accountRepository.getByEmail(request.email());
-        if(!passwordEncoder.matches(request.password(), account.passwordHash())){
-           throw new AccountNotFoundException(request.email());
+        if (!passwordEncoder.matches(request.password(), account.passwordHash())) {
+            throw new AccountNotFoundException(request.email());
         }
         return request.email();
     }

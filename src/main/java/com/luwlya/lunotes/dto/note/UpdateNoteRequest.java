@@ -4,9 +4,9 @@ import com.luwlya.lunotes.model.NoteVisibility;
 
 import java.util.List;
 
-public record UpdateNoteRequest (
+public record UpdateNoteRequest(
         String title,
         String text,
         List<String> tags,
-        NoteVisibility noteVisibility){
+        NoteVisibility noteVisibility) {
 }
