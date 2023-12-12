@@ -25,7 +25,7 @@ POST http://localhost:8080/notes
 Content-Type: application/json
 
 {
-  "authorId": "ba431486-b77d-4eeb-ba88-fc2b583fa676",
+  "authorId": "8b10cb0a-36bc-4115-a0e9-f44d5d00db9d",
   "title": "MyNote",
   "text": "Test my Note",
   "tags": [
@@ -39,7 +39,7 @@ Content-Type: application/json
 GET http://localhost:8080/notes
 
 ###
-GET http://localhost:8080/notes/b704d022-ce28-4ccd-8f9b-52bde85112ac
+GET http://localhost:8080/notes/e77f4c14-531a-442c-8026-c0f4def38df2
 
 ###
 PATCH http://localhost:8080/notes/e89d87e0-50e3-476a-a1ad-e04cca9d620a

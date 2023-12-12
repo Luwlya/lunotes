@@ -8,6 +8,8 @@ import com.luwlya.lunotes.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +33,8 @@ public class NoteController {
 
     @GetMapping("/notes")
     public ResponseEntity<NoteDtoList> getAllNotes(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("authenticated as: " + auth);
         NoteDtoList listDto = noteService.getAllNotes();
         return ResponseEntity.ok().body(listDto);
     }
