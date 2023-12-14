@@ -31,7 +31,7 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public NoteDto createNote(CreateNoteRequest request) {
         Note note = new Note(UUID.randomUUID(),
-                request.authorId(),
+                (UUID) SecurityContextHolder.getContext().getAuthentication().getPrincipal(),
                 request.title(),
                 request.text(),
                 OffsetDateTime.now(clock),

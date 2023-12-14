@@ -24,6 +24,7 @@ public class NoteController {
     }
 
     @PostMapping("/notes")
+    @Secured("ROLE_USER")
     public ResponseEntity<NoteDto> createNote(@RequestBody @Validated CreateNoteRequest request) {
         NoteDto noteDto = noteService.createNote(request);
         return ResponseEntity.ok().body(noteDto);
