@@ -25,6 +25,6 @@ public class LoginServiceImpl implements LoginService {
         if (!passwordEncoder.matches(request.password(), account.passwordHash())) {
             throw new AccountNotFoundException(request.email());
         }
-        return request.email();
+        return account.id().toString();
     }
 }

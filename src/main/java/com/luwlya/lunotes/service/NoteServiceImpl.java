@@ -9,6 +9,7 @@ import com.luwlya.lunotes.model.Note;
 import com.luwlya.lunotes.model.NoteVisibility;
 import com.luwlya.lunotes.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.Clock;
@@ -35,7 +36,7 @@ public class NoteServiceImpl implements NoteService {
                 request.text(),
                 OffsetDateTime.now(clock),
                 OffsetDateTime.now(clock),
-                NoteVisibility.PUBLIC,
+                request.visibility(),
                 request.tags());
         noteRepository.insert(note);
         return dto(note);
@@ -49,13 +50,17 @@ public class NoteServiceImpl implements NoteService {
                 note.text(),
                 OffsetDateTime.now(),
                 OffsetDateTime.now(),
-                NoteVisibility.PUBLIC,
+                note.noteVisibility(),
                 note.tags());
     }
 
     @Override
     public NoteDto getNote(UUID id) {
         Note note = noteRepository.get(id);
+        Object currentUserId = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (note.noteVisibility() != NoteVisibility.PUBLIC && !note.authorId().equals(currentUserId)) {
+            throw new NoteNotFoundException(id);
+        }
         return dto(note);
     }
 

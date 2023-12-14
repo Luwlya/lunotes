@@ -45,7 +45,7 @@ public class NoteRepositoryImpl implements NoteRepository {
 
     private Note extractNote(ResultSet rs, int i) throws SQLException {
         return new Note(rs.getObject("id", UUID.class),
-                rs.getObject("id", UUID.class),
+                rs.getObject("author_id", UUID.class),
                 rs.getString("title"),
                 rs.getString("text"),
                 rs.getObject("created_at", OffsetDateTime.class),

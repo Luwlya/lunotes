@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public class JwtFilter implements Filter {
     @Override
@@ -26,7 +27,8 @@ public class JwtFilter implements Filter {
                     .findFirst();
             token.ifPresent(cookie -> {
                 var authorities = List.of(new SimpleGrantedAuthority("ROLE_USER"));
-                var user = new UsernamePasswordAuthenticationToken(cookie.getValue(), "", authorities);
+                UUID userId = UUID.fromString(cookie.getValue());
+                var user = new UsernamePasswordAuthenticationToken(userId, "", authorities);
                 SecurityContextHolder.getContext().setAuthentication(user);
             });
         }

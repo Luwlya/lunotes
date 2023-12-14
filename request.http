@@ -5,8 +5,8 @@ POST http://localhost:8080/accounts
 Content-Type: application/json
 
 {
-  "name": "Luwelka",
-  "email": "lulu@luwlya.com",
+  "name": "Kuwa",
+  "email": "kuku@luwlya.com",
   "password": "1234pass4321"
 }
 
@@ -26,20 +26,20 @@ Content-Type: application/json
 
 {
   "authorId": "ba431486-b77d-4eeb-ba88-fc2b583fa676",
-  "title": "MyNote",
-  "text": "Test my Note",
+  "title": "Private1",
+  "text": "Test my Private Note",
   "tags": [
     "test",
     "Note"
   ],
-  "visibility": ""
+  "visibility": "PRIVATE"
 }
 
 ###
 GET http://localhost:8080/notes
 
 ###
-GET http://localhost:8080/notes/b704d022-ce28-4ccd-8f9b-52bde85112ac
+GET http://localhost:8080/notes/818c5382-004a-4fd9-a7cf-26d7b653f4ef
 
 ###
 PATCH http://localhost:8080/notes/e89d87e0-50e3-476a-a1ad-e04cca9d620a
@@ -57,6 +57,6 @@ POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "email": "lulu@luwlya.com",
+  "email": "kuku@luwlya.com",
   "password": "1234pass4321"
 }
