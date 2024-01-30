@@ -6,9 +6,11 @@
 + 5a. accounts
 + 5aa. account get
 + 5b. notes
-5c. login
++ 5c. login
 + 6. add postgres db
-7. add validation
+6a. login security key to yaml
++ 7. add validation
+7a. fix problem with tags
 8. tests
 9. frontend
 10. deploy

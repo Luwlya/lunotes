@@ -13,7 +13,7 @@ import javax.crypto.SecretKey;
 
 @Service
 public class LoginServiceImpl implements LoginService {
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
     private final SecretKey secretKey;
 
