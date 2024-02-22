@@ -42,7 +42,7 @@ class AccountRepositoryImplTest {
         OffsetDateTime utcNow = OffsetDateTime.now().withOffsetSameInstant(ZoneOffset.UTC);
         Account account = new Account(UUID.randomUUID(), "Headshot", "head@cat.com", "hash", utcNow, utcNow.plusSeconds(1), AccountStatus.ACTIVE);
         unit.insert(account);
-        Account updated = account.withStatus(AccountStatus.INACTIVE);
+        Account updated = account.withStatus(AccountStatus.INACTIVE).withName("Cat").withUpdatedAt(utcNow.plusSeconds(10));
         unit.update(updated);
         Account actualAccount = unit.get(account.id());
         assertEquals(updated, actualAccount);
