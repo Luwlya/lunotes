@@ -38,11 +38,13 @@ class AccountRepositoryImplTest {
     }
 
     @Test
-    void get() {
-
-    }
-
-    @Test
     void update() {
+        OffsetDateTime utcNow = OffsetDateTime.now().withOffsetSameInstant(ZoneOffset.UTC);
+        Account account = new Account(UUID.randomUUID(), "Headshot", "head@cat.com", "hash", utcNow, utcNow.plusSeconds(1), AccountStatus.ACTIVE);
+        unit.insert(account);
+        Account updated = account.withStatus(AccountStatus.INACTIVE);
+        unit.update(updated);
+        Account actualAccount = unit.get(account.id());
+        assertEquals(updated, actualAccount);
     }
 }
