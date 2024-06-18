@@ -57,16 +57,21 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public NoteDto getNote(UUID id) {
         Note note = noteRepository.get(id);
-        Object currentUserId = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UUID currentUserId = getCurrentUserId();
         if (note.noteVisibility() != NoteVisibility.PUBLIC && !note.authorId().equals(currentUserId)) {
             throw new NoteNotFoundException(id);
         }
         return dto(note);
     }
 
+    private static UUID getCurrentUserId() {
+        return (UUID) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
     @Override
-    public NoteDtoList getAllNotes() {
-        List<Note> notes = noteRepository.getAllNotes();
+    public NoteDtoList getAllNotes(String title, String tag, String text) {
+        UUID currentUserId = getCurrentUserId();
+        List<Note> notes = noteRepository.getAllNotes(currentUserId, title, tag, text);
         List<NoteDto> result = notes.stream().map(this::dto).toList();
         return new NoteDtoList(result);
     }

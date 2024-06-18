@@ -29,6 +29,15 @@ class AccountRepositoryImplTest {
     }
 
     @Test
+    void insertNotPossible() {
+        OffsetDateTime utcNow = OffsetDateTime.now().withOffsetSameInstant(ZoneOffset.UTC);
+        Account account = new Account(UUID.randomUUID(), "Headshot", "head@cat.com", "hash", utcNow, utcNow.plusSeconds(1), AccountStatus.ACTIVE);
+        unit.insert(account);
+        Account actualAccount = unit.get(account.id());
+        assertEquals(account, actualAccount);
+    }
+
+    @Test
     void insert() {
         OffsetDateTime utcNow = OffsetDateTime.now().withOffsetSameInstant(ZoneOffset.UTC);
         Account account = new Account(UUID.randomUUID(), "Headshot", "head@cat.com", "hash", utcNow, utcNow.plusSeconds(1), AccountStatus.ACTIVE);
@@ -46,5 +55,14 @@ class AccountRepositoryImplTest {
         unit.update(updated);
         Account actualAccount = unit.get(account.id());
         assertEquals(updated, actualAccount);
+    }
+
+    @Test
+    void getByEmail() {
+        OffsetDateTime utcNow = OffsetDateTime.now().withOffsetSameInstant(ZoneOffset.UTC);
+        Account account = new Account(UUID.randomUUID(), "Headshot", "head@cat.com", "hash", utcNow, utcNow.plusSeconds(1), AccountStatus.ACTIVE);
+        unit.insert(account);
+        Account actualAccount = unit.getByEmail(account.email());
+        assertEquals(account, actualAccount);
     }
 }

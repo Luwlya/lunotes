@@ -10,7 +10,7 @@ public interface NoteRepository {
 
     Note get(UUID id);
 
-    List<Note> getAllNotes();
+    List<Note> getAllNotes(UUID authorId, String title, String tag, String text);
 
     void update(Note updatedNote);
 

@@ -8,9 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Repository
 public class NoteRepositoryImpl implements NoteRepository {
@@ -55,8 +53,20 @@ public class NoteRepositoryImpl implements NoteRepository {
     }
 
     @Override
-    public List<Note> getAllNotes() {
-        return jdbcTemplate.query("SELECT * FROM notes", this::extractNote);
+    public List<Note> getAllNotes(UUID authorId, String title, String tag, String text) {
+        String query = "SELECT * FROM notes WHERE author_id = ?";
+        if (title != null) {
+            query = query + " AND title = ?";
+        }
+        if (tag != null) {
+            query = query + " AND arraycontains(tags, ?)";
+        }
+        if (text != null) {
+            query += " AND text LIKE ?";
+            text = "%" + text + "%";
+        }
+        Object[] args = Arrays.asList(authorId, title, tag, text).stream().filter(Objects::nonNull).toArray();
+        return jdbcTemplate.query(query, this::extractNote, args);
     }
 
     @Override

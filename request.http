@@ -26,7 +26,7 @@ Content-Type: application/json
 
 {
   "authorId": "ba431486-b77d-4eeb-ba88-fc2b583fa676",
-  "title": "Private1",
+  "title": "NonPrivate",
   "text": "Test my Private Note",
   "tags": [
     "test",
@@ -36,7 +36,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:8080/notes
+GET http://localhost:8080/notes?text=Private
 
 ###
 GET http://localhost:8080/notes/308d2ec9-c8e3-4aac-b5cc-f46f63f89a64
@@ -57,6 +57,6 @@ POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-  "email": "luwlya12@luwlya.com",
+  "email": "kuku@luwlya.com",
   "password": "1234pass4321"
 }

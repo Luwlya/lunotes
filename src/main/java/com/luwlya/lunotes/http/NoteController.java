@@ -31,8 +31,11 @@ public class NoteController {
     }
 
     @GetMapping("/notes")
-    public ResponseEntity<NoteDtoList> getAllNotes() {
-        NoteDtoList listDto = noteService.getAllNotes();
+    @Secured("ROLE_USER")
+    public ResponseEntity<NoteDtoList> getAllNotes(@RequestParam(required = false) String title,
+                                                   @RequestParam(required = false) String tag,
+                                                   @RequestParam(required = false) String text) {
+        NoteDtoList listDto = noteService.getAllNotes(title, tag, text);
         return ResponseEntity.ok().body(listDto);
     }
 

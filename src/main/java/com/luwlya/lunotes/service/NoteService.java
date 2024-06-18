@@ -12,7 +12,7 @@ public interface NoteService {
 
     NoteDto getNote(UUID id);
 
-    NoteDtoList getAllNotes();
+    NoteDtoList getAllNotes(String title, String tag, String text);
 
     NoteDto updateNote(UUID id, UpdateNoteRequest update);
 
